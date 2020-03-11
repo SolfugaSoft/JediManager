@@ -2,12 +2,12 @@ package gui;
 
 import java.awt.*;
 
-public class StartFrame {
+public class RunGui {
 
-    public StartFrame() {
+    public RunGui() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                StartFrame startFrame = new StartFrame();
             }
         });
     }
