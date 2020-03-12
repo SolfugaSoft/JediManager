@@ -13,7 +13,7 @@ public class KnightPane extends JPanel {
     private JTextField textFieldKnightName; //ok
     private JLabel labelKnightSwordColor;//ok
     private JComboBox comboBoxKnightSwordColor;//ok
-    private JLabel labelKnightPower;
+    private JLabel labelKnightPower; //ok
     private JSlider sliderKnightPower;
     private JLabel labelKnightForceSite;
     private JRadioButton radioButtonKnightDarkSite;
@@ -54,33 +54,39 @@ public class KnightPane extends JPanel {
 
         labelKnightName = new JLabel();
         labelKnightName.setText("Nazwa :");
-        labelKnightName.setBounds(10,480,150,30);
+        labelKnightName.setBounds(10, 480, 150, 30);
         add(labelKnightName);
 
         textFieldKnightName = new JTextField();
-        textFieldKnightName.setBounds(100,480,370,30);
+        textFieldKnightName.setBounds(100, 480, 370, 30);
         add(textFieldKnightName);
 
         labelKnightSwordColor = new JLabel();
         labelKnightSwordColor.setText("Kolor miecza");
-        labelKnightSwordColor.setBounds(10,520,150,30);
+        labelKnightSwordColor.setBounds(10, 520, 150, 30);
         add(labelKnightSwordColor);
 
 
-        String [] swordColor = {"RED","BLUE","GRYNSZPAN"};
+        String[] swordColor = {"RED", "BLUE", "GRYNSZPAN"};
         comboBoxKnightSwordColor = new JComboBox(swordColor);
-        comboBoxKnightSwordColor.setBounds(100,520,150,30);
+        comboBoxKnightSwordColor.setBounds(100, 520, 150, 30);
         add(comboBoxKnightSwordColor);
 
+        labelKnightPower = new JLabel();
+        labelKnightPower.setText("Moc");
+        labelKnightPower.setBounds(10, 560, 150, 30);
+        add(labelKnightPower);
 
-
-
-
-
-
-
-
-
+        sliderKnightPower = new JSlider();
+        sliderKnightPower.setBounds(100, 560, 300, 60);
+        sliderKnightPower.setMajorTickSpacing(250);
+        sliderKnightPower.setMinorTickSpacing(25);
+        sliderKnightPower.setMaximum(1000);
+        sliderKnightPower.setMinimum(0);
+        sliderKnightPower.setPaintTicks(true);
+        sliderKnightPower.setPaintLabels(true);
+        sliderKnightPower.setOrientation(SwingConstants.HORIZONTAL);
+        add(sliderKnightPower);
 
     }
 
