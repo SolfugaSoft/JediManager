@@ -42,11 +42,12 @@ public class JDBCConnector implements Functions {
                     "INSERT INTO JediKnight(FirstName,SwordColor,Power,ForceSite) VALUES (\n" +
                             "'Anna', 'Oliwkowy', 666, 'GUnit');"
             );
-
+            System.out.println("poszło");
         } catch (SQLException e) {
+            System.out.println("nie poszło");
             e.printStackTrace();
         }
-        System.out.println("poszło");
+
     }
 
     public void get() {
