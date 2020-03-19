@@ -1,10 +1,15 @@
 package gui;
 
+import orderAndKnights.Knight;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
 
+    private ArrayList<Knight> knightList = new ArrayList();
+    private Knight knight;
 
     private JLabel labelKnight; // ok
     private JTextArea textAreaKnight; // ok
@@ -33,7 +38,6 @@ public class KnightPane extends JPanel {
 
 
     public KnightPane() {
-
         setLayout(null);
         labelKnight = new JLabel();
         labelKnight.setText("Jedi");
@@ -60,6 +64,7 @@ public class KnightPane extends JPanel {
 
         textFieldKnightName = new JTextField();
         textFieldKnightName.setBounds(100, 480, 370, 30);
+        textFieldKnightName.setToolTipText("Jak zwą tego dzielnego wojaka");
         add(textFieldKnightName);
 
         labelKnightSwordColor = new JLabel();
@@ -109,6 +114,7 @@ public class KnightPane extends JPanel {
         buttonGroupKnightForceSide.add(radioButtonKnightDarkSite);
         add(radioButtonKnightDarkSite);
 
+
         buttonKnightImport = new JButton();
         buttonKnightImport.setText("Import");
         buttonKnightImport.setBounds(10, 650, 80, 30);
@@ -139,7 +145,27 @@ public class KnightPane extends JPanel {
 
         buttonRegister = new JButton();
         buttonRegister.setText("Zarejestruj");
-        buttonRegister.setBounds(250,730,100,50);
+        buttonRegister.setBounds(250, 730, 100, 50);
+        buttonRegister.addActionListener(e -> {
+            knight = new Knight();
+            knight.setName(textFieldKnightName.getText());
+            knight.setPower(sliderKnightPower.getValue());
+            knight.setSwordColor(comboBoxKnightSwordColor.getSelectedIndex());
+            if (radioButtonKnightDarkSite.isSelected()) {
+
+                knight.setSite(0);
+            } else if (radioButtonKnightBright.isSelected()) {
+                knight.setSite(1);
+            }
+            knightList.add(knight);
+            for (Knight k : knightList) {
+                String text = k.toString();
+                textAreaKnight.setText(text + "\n");
+                System.out.println(k);
+            }
+
+        });
+
         add(buttonRegister);
 
 

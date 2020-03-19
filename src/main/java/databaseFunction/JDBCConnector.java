@@ -1,4 +1,4 @@
-package gui;
+package databaseFunction;
 
 import orderAndKnights.Functions;
 
@@ -9,7 +9,7 @@ public class JDBCConnector implements Functions {
 
     //https://remotemysql.com/phpmyadmin/tbl_sql.php?db=qeabw7Rsms&table=JediKnight
     //    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String URL = "jdbc:mysql://remotemysql.com:330666/qeabw7Rsms";
+    static final String URL = "jdbc:mysql://remotemysql.com:3306/qeabw7Rsms";
     static final String USER = "qeabw7Rsms";
     static final String PASSWORD = "v5HGLnVJDe";
 

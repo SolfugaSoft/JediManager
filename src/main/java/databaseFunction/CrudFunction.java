@@ -1,6 +1,6 @@
-package orderAndKnights;
+package databaseFunction;
 
-import gui.JDBCConnector;
+import databaseFunction.JDBCConnector;
 
 public class CrudFunction extends JDBCConnector {
 

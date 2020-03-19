@@ -10,11 +10,12 @@ public class OrderPane extends JPanel {
     private JLabel labelOrderRegister; // ok
     private JLabel labelOrderName;//ok
     private JTextField textFieldOrderName; //ok
+    private JButton buttonOrderChoose;
     private JTextArea textFieldChooseJedi; // ok
-    private JButton buttonKnightImport; //ok
-    private JTextField textFieldKnightImport;
-    private JButton buttonKnightExport;//ok
-    private JTextField textFieldKnightExport;//ok
+    private JButton buttonOrderImport; //ok
+    private JTextField textFieldOrderImport;
+    private JButton buttonOrderExport;//ok
+    private JTextField textFieldOrderExport;//ok
     private JButton buttonOrderRegister;
     private JButton buttonOrderClear;
 
@@ -51,40 +52,45 @@ public class OrderPane extends JPanel {
         add(labelOrderName);
 
         textFieldOrderName = new JTextField();
-        textFieldOrderName.setBounds(100, 480, 370, 30);
+        textFieldOrderName.setBounds(100, 480, 320, 30);
         add(textFieldOrderName);
 
+        buttonOrderChoose = new JButton();
+        buttonOrderChoose.setText("Wybierz");
+        buttonOrderChoose.setBounds(10, 520, 80, 30);
+        add(buttonOrderChoose);
+
         textFieldChooseJedi = new JTextArea();
-        textFieldChooseJedi.setBounds(100, 520, 370, 100);
+        textFieldChooseJedi.setBounds(100, 520, 320, 100);
         add(textFieldChooseJedi);
 
 
-        buttonKnightImport = new JButton();
-        buttonKnightImport.setText("Import");
-        buttonKnightImport.setBounds(10, 650, 80, 30);
-        add(buttonKnightImport);
+        buttonOrderImport = new JButton();
+        buttonOrderImport.setText("Import");
+        buttonOrderImport.setBounds(10, 650, 80, 30);
+        add(buttonOrderImport);
 
-        textFieldKnightImport = new JTextField();
-        textFieldKnightImport.setText("skąd otworzyć");
+        textFieldOrderImport = new JTextField();
+        textFieldOrderImport.setText("skąd otworzyć");
 
-        textFieldKnightImport.setBounds(100, 650, 300, 30);
-        textFieldKnightImport.setEnabled(true);
-        textFieldKnightImport.setBackground(Color.LIGHT_GRAY);
-        textFieldKnightImport.setForeground(Color.red);
-        add(textFieldKnightImport);
+        textFieldOrderImport.setBounds(100, 650, 300, 30);
+        textFieldOrderImport.setEnabled(true);
+        textFieldOrderImport.setBackground(Color.LIGHT_GRAY);
+        textFieldOrderImport.setForeground(Color.red);
+        add(textFieldOrderImport);
 
-        buttonKnightExport = new JButton();
-        buttonKnightExport.setText("Eksport");
-        buttonKnightExport.setBounds(10, 695, 80, 30);
-        add(buttonKnightExport);
+        buttonOrderExport = new JButton();
+        buttonOrderExport.setText("Eksport");
+        buttonOrderExport.setBounds(10, 695, 80, 30);
+        add(buttonOrderExport);
 
-        textFieldKnightExport = new JTextField();
-        textFieldKnightExport.setText("gdzie zapisać");
-        textFieldKnightExport.setBounds(100, 695, 300, 30);
-        textFieldKnightExport.setEnabled(true);
-        textFieldKnightExport.setBackground(Color.lightGray);
-        textFieldKnightExport.setForeground(Color.black);
-        add(textFieldKnightExport);
+        textFieldOrderExport = new JTextField();
+        textFieldOrderExport.setText("gdzie zapisać");
+        textFieldOrderExport.setBounds(100, 695, 300, 30);
+        textFieldOrderExport.setEnabled(true);
+        textFieldOrderExport.setBackground(Color.lightGray);
+        textFieldOrderExport.setForeground(Color.black);
+        add(textFieldOrderExport);
 
 
         buttonOrderRegister = new JButton();
