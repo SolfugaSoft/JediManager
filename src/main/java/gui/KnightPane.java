@@ -59,7 +59,7 @@ public class KnightPane extends JPanel {
 //        textAreaKnight.setLineWrap(true);
 //        add(textAreaKnight);
 
-        String[] tablename = {"ID","Imie","Kolor Miecza","Moc","Strona Mocy"};
+        String[] tablename = {"ID", "Imie", "Kolor Miecza", "Moc", "Strona Mocy"};
         tableKnight = new JTable();
         tableKnight.setAutoscrolls(true);
         tableKnight.setModel(new DefaultTableModel(new Object[][]{}, tablename));
@@ -67,7 +67,7 @@ public class KnightPane extends JPanel {
 
         scrollKnight = new JScrollPane();
         scrollKnight.setViewportView(tableKnight);
-        scrollKnight.setBounds(10,50,480,400);
+        scrollKnight.setBounds(10, 50, 480, 400);
         add(scrollKnight);
 
         labelKnightRegister = new JLabel();
@@ -175,16 +175,14 @@ public class KnightPane extends JPanel {
             } else if (radioButtonKnightBright.isSelected()) {
                 knight.setSite(1);
             }
-
             knightList.add(knight);
-            models.addToTable(knightList, tableKnight);
-
+//            models.addListToTable(knightList, tableKnight);
+            models.addValueToTable(knight, tableKnight);
 
         });
 
 
         add(buttonRegister);
-
 
 
         buttonClear = new JButton();
