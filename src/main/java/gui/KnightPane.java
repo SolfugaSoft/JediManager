@@ -1,18 +1,25 @@
 package gui;
 
+import databaseFunction.JDBCConnector;
 import orderAndKnights.Knight;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
 
+    JDBCConnector jdbcConnector;
+    Models models = new Models();
     private ArrayList<Knight> knightList = new ArrayList();
     private Knight knight;
 
     private JLabel labelKnight; // ok
     private JTextArea textAreaKnight; // ok
+    private JScrollPane scrollKnight;
+    private JTable tableKnight; //ok
+
     private JLabel labelKnightRegister; // ok
     private JLabel labelKnightName;//ok
     private JTextField textFieldKnightName; //ok
@@ -44,13 +51,24 @@ public class KnightPane extends JPanel {
         labelKnight.setBounds(250, 20, 70, 30);
         add(labelKnight);
 
-        textAreaKnight = new JTextArea();
-        textAreaKnight.setAlignmentX(CENTER_ALIGNMENT);
-        textAreaKnight.setBounds(10, 50, 480, 400);
-        textAreaKnight.setColumns(2);
-        textAreaKnight.setRows(50);
-        textAreaKnight.setLineWrap(true);
-        add(textAreaKnight);
+//        textAreaKnight = new JTextArea();
+//        textAreaKnight.setAlignmentX(CENTER_ALIGNMENT);
+//        textAreaKnight.setBounds(10, 50, 480, 400);
+//        textAreaKnight.setColumns(2);
+//        textAreaKnight.setRows(50);
+//        textAreaKnight.setLineWrap(true);
+//        add(textAreaKnight);
+
+        String[] tablename = {"ID","Imie","Kolor Miecza","Moc","Strona Mocy"};
+        tableKnight = new JTable();
+        tableKnight.setAutoscrolls(true);
+        tableKnight.setModel(new DefaultTableModel(new Object[][]{}, tablename));
+//        tableKnight.setBounds(10, 50, 480, 400);
+
+        scrollKnight = new JScrollPane();
+        scrollKnight.setViewportView(tableKnight);
+        scrollKnight.setBounds(10,50,480,400);
+        add(scrollKnight);
 
         labelKnightRegister = new JLabel();
         labelKnightRegister.setText("Rejestracja Jedi");
@@ -157,20 +175,24 @@ public class KnightPane extends JPanel {
             } else if (radioButtonKnightBright.isSelected()) {
                 knight.setSite(1);
             }
+
             knightList.add(knight);
-            for (Knight k : knightList) {
-                String text = k.toString();
-                textAreaKnight.setText(text + "\n");
-                System.out.println(k);
-            }
+            models.addToTable(knightList, tableKnight);
+
 
         });
+
 
         add(buttonRegister);
 
 
+
         buttonClear = new JButton();
         buttonClear.setText("Wyczyść");
+        buttonClear.addActionListener(e -> {
+            System.out.println(knightList);
+        });
+
         buttonClear.setBounds(100, 730, 100, 50);
         add(buttonClear);
 

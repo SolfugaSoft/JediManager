@@ -2,8 +2,8 @@ package databaseFunction;
 
 import orderAndKnights.Functions;
 
-import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class JDBCConnector implements Functions {
 
@@ -51,26 +51,51 @@ public class JDBCConnector implements Functions {
 
     }
 
-    public void get() {
+    public ArrayList<String> get() {
+
+        String knight = "";
+        ArrayList<String> getJediArray = new ArrayList<>();
         String tableName = "JediKnight";
         String addQuery = "SELECT * FROM " + tableName;
         try {
             ResultSet resultSet = StartConnection().executeQuery(addQuery);
             while (resultSet.next()) {
-                System.out.printf("ID : %d, First Name : %s, Sword Color : %s, Power : %d, Force Site %s \n",
-                        resultSet.getInt("ID"),
+//                System.out.printf("%d,%s,%s,%d,%s \n",
+//                        resultSet.getInt("ID"),
+//                        resultSet.getString("FirstName"),
+//                        resultSet.getString("SwordColor"),
+//                        resultSet.getInt("Power"),
+//                        resultSet.getString("ForceSite"));
+
+                String[] knightTable = {String.valueOf(resultSet.getInt("ID")),
                         resultSet.getString("FirstName"),
                         resultSet.getString("SwordColor"),
-                        resultSet.getInt("Power"),
-                        resultSet.getString("ForceSite")
-                );
+                        String.valueOf(resultSet.getInt("Power")),
+                        resultSet.getString("ForceSite")};
+
+                for (int i = 0; i < knightTable.length; i++) {
+                    knight = knight + knightTable[i] + ",";
+                }
+                getJediArray.add(knight);
+                knight = "";
+                System.out.println(getJediArray);
             }
+
         } catch (SQLException e) {
             System.out.println("OOOoooo motyla noga cos nie działa");
             e.printStackTrace();
         }
 
+        return getJediArray;
+    }
+
+    @Override
+    public void refreshTable() {
+
+
 
     }
+
+
 }
 
