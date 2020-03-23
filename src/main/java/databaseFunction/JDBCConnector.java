@@ -1,21 +1,28 @@
 package databaseFunction;
 
 import orderAndKnights.Functions;
+import orderAndKnights.Knight;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class JDBCConnector implements Functions {
+
+    public JDBCConnector() {
+    }
 
     //https://remotemysql.com/phpmyadmin/tbl_sql.php?db=qeabw7Rsms&table=JediKnight
     //    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String URL = "jdbc:mysql://remotemysql.com:3306/qeabw7Rsms";
     static final String USER = "qeabw7Rsms";
     static final String PASSWORD = "v5HGLnVJDe";
-
+    private static Statement statement;
+    private static File file;
 
     public static Statement StartConnection() {
-        Statement statement = null;
         try {
 //            Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -90,12 +97,35 @@ public class JDBCConnector implements Functions {
     }
 
     @Override
-    public void refreshTable() {
+    public void saveIntoFile(Component parent, ArrayList<Knight> objectsToSave) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Place this Data File in the safest place");
+        int value = fileChooser.showSaveDialog(parent);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            System.out.println("Kaj sie to zapisało " + file.getAbsolutePath());
+            if (file == null) {
+                return;
+            }
+            if (!file.getName().toLowerCase().endsWith(".txt")) {
+                file = new File(file.getParentFile(), file.getName() + ".txt");
+            }
+            try {
+                PrintWriter printWriter = new PrintWriter(file, "UTF-8");
+                for (Object o : objectsToSave) {
+                    printWriter.write(o.toString());
+                }
+                printWriter.flush();
+                printWriter.close();
 
-
-
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
-
-
 }
+
+
 

@@ -1,5 +1,6 @@
 package orderAndKnights;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public interface Functions {
@@ -7,5 +8,6 @@ public interface Functions {
 
     public ArrayList<String> get();
 
-    public void refreshTable();
+    public void saveIntoFile(Component parent, ArrayList<Knight> objectsToSave);
+
 }

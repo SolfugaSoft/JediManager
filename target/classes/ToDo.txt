@@ -1,0 +1,25 @@
+1 . Create Window
+    -Knight -> OK
+    -Order -> OK
+
+2 . Create DB
+    -Remote MySQL -> OK
+
+3 . Create Connection
+    -Reading from Jedi DB -> OK
+    -Writing into Jedi DB -> OK
+
+4 . Create Knight Functions
+    -Show new Knight in Table -> OK
+    -Save Knight into List -> OK
+    -Save Knight into local TXT file
+    -Save Knight into remote DB
+
+5 . Create Order Function
+    -Show new Order in Table
+    -Add Knight to Order
+    -Save Order into List
+    -Save Order into local TXT file
+    -Save Order into remote DB
+
+

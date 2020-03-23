@@ -9,8 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
-
-    JDBCConnector jdbcConnector;
+    JDBCConnector jdbcConnector = new JDBCConnector();
     Models models = new Models();
     private ArrayList<Knight> knightList = new ArrayList();
     private Knight knight;
@@ -147,9 +146,15 @@ public class KnightPane extends JPanel {
         textFieldKnightImport.setForeground(Color.red);
         add(textFieldKnightImport);
 
+
         buttonKnightExport = new JButton();
         buttonKnightExport.setText("Eksport");
         buttonKnightExport.setBounds(10, 695, 80, 30);
+        buttonKnightExport.addActionListener(e -> {
+     jdbcConnector.saveIntoFile(buttonKnightExport,knightList);
+
+        });
+
         add(buttonKnightExport);
 
         textFieldKnightExport = new JTextField();
@@ -158,13 +163,14 @@ public class KnightPane extends JPanel {
         textFieldKnightExport.setEnabled(true);
         textFieldKnightExport.setBackground(Color.lightGray);
         textFieldKnightExport.setForeground(Color.black);
-        add(textFieldKnightExport);
 
+        add(textFieldKnightExport);
 
         buttonRegister = new JButton();
         buttonRegister.setText("Zarejestruj");
         buttonRegister.setBounds(250, 730, 100, 50);
-        buttonRegister.addActionListener(e -> {
+        buttonRegister.addActionListener(e ->
+        {
             knight = new Knight();
             knight.setName(textFieldKnightName.getText());
             knight.setPower(sliderKnightPower.getValue());
@@ -178,12 +184,9 @@ public class KnightPane extends JPanel {
             knightList.add(knight);
 //            models.addListToTable(knightList, tableKnight);
             models.addValueToTable(knight, tableKnight);
-
         });
 
-
         add(buttonRegister);
-
 
         buttonClear = new JButton();
         buttonClear.setText("Wyczyść");
@@ -192,6 +195,7 @@ public class KnightPane extends JPanel {
         });
 
         buttonClear.setBounds(100, 730, 100, 50);
+
         add(buttonClear);
 
     }
