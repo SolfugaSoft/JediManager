@@ -44,14 +44,13 @@ public class Knight {
         this.swordColor = swordColors[swordColor];
     }
 
-
     @Override
     public String toString() {
-        return "Knight{" +
-                "name='" + name + '\'' +
-                ", power=" + power +
-                ", site=" + site +
-                ", swordColor=" + swordColor +
-                '}';
+        return
+                "'name'" + "'" +name+"'" +
+                 "'power'" +"'" + power +"'" +
+                "'site'" +"'"+ site + "'" +
+                "'swordColor'" + "'"+swordColor+"'"
+                ;
     }
 }

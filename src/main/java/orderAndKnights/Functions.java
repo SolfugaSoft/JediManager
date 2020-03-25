@@ -10,4 +10,7 @@ public interface Functions {
 
     public void saveIntoFile(Component parent, ArrayList<Knight> objectsToSave);
 
+    public ArrayList<Knight> readFromFile(Component parent);
+
+
 }

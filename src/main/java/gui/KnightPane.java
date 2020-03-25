@@ -1,5 +1,6 @@
 package gui;
 
+import databaseFunction.CrudFunction;
 import databaseFunction.JDBCConnector;
 import orderAndKnights.Knight;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
-    JDBCConnector jdbcConnector = new JDBCConnector();
+    CrudFunction crudFunction = new CrudFunction();
     Models models = new Models();
     private ArrayList<Knight> knightList = new ArrayList();
     private Knight knight;
@@ -135,6 +136,9 @@ public class KnightPane extends JPanel {
         buttonKnightImport = new JButton();
         buttonKnightImport.setText("Import");
         buttonKnightImport.setBounds(10, 650, 80, 30);
+        buttonKnightImport.addActionListener(e -> {
+            crudFunction.readFromFile(buttonKnightImport);
+        });
         add(buttonKnightImport);
 
         textFieldKnightImport = new JTextField();
@@ -151,7 +155,7 @@ public class KnightPane extends JPanel {
         buttonKnightExport.setText("Eksport");
         buttonKnightExport.setBounds(10, 695, 80, 30);
         buttonKnightExport.addActionListener(e -> {
-     jdbcConnector.saveIntoFile(buttonKnightExport,knightList);
+            crudFunction.saveIntoFile(buttonKnightExport, knightList);
 
         });
 

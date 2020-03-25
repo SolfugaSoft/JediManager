@@ -12,7 +12,7 @@
 4 . Create Knight Functions
     -Show new Knight in Table -> OK
     -Save Knight into List -> OK
-    -Save Knight into local TXT file
+    -Save Knight into local TXT file -> OK
     -Save Knight into remote DB
 
 5 . Create Order Function
