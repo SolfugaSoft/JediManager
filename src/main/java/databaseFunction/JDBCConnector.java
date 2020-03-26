@@ -39,7 +39,6 @@ public class JDBCConnector {
         return statement;
 
     }
-    //    public void add(String name, String swordColor,int power, String forceSite)
 
 }
 

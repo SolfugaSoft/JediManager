@@ -7,6 +7,8 @@ import orderAndKnights.Knight;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
@@ -137,7 +139,7 @@ public class KnightPane extends JPanel {
         buttonKnightImport.setText("Import");
         buttonKnightImport.setBounds(10, 650, 80, 30);
         buttonKnightImport.addActionListener(e -> {
-            crudFunction.readFromFile(buttonKnightImport);
+            models.addListToTable(crudFunction.readFromFile(buttonKnightImport, textFieldKnightImport), tableKnight);
         });
         add(buttonKnightImport);
 
@@ -155,7 +157,7 @@ public class KnightPane extends JPanel {
         buttonKnightExport.setText("Eksport");
         buttonKnightExport.setBounds(10, 695, 80, 30);
         buttonKnightExport.addActionListener(e -> {
-            crudFunction.saveIntoFile(buttonKnightExport, knightList);
+            crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
 
         });
 
@@ -186,7 +188,6 @@ public class KnightPane extends JPanel {
                 knight.setSite(1);
             }
             knightList.add(knight);
-//            models.addListToTable(knightList, tableKnight);
             models.addValueToTable(knight, tableKnight);
         });
 

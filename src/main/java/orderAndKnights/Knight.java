@@ -1,15 +1,23 @@
 package orderAndKnights;
 
 public class Knight {
-
+    private int id;
     private String name;
+    private SwordColor swordColor;
     private int power;
     private Site site;
-    private SwordColor swordColor;
     private Site[] sites = Site.values();
     private SwordColor[] swordColors = SwordColor.values();
 
     public Knight() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,10 +55,25 @@ public class Knight {
     @Override
     public String toString() {
         return
-                "'name'" + "'" +name+"'" +
-                 "'power'" +"'" + power +"'" +
-                "'site'" +"'"+ site + "'" +
-                "'swordColor'" + "'"+swordColor+"'"
+                "name='" + name + '\'' +
+                        ", swordColor=" + swordColor +
+                        ", power=" + power +
+                        ", site=" + site + "\n";
+
+    }
+
+    public String sqlFormat() {
+        return
+                "('" + name + "'," +
+                        "'" + swordColor + "'," +
+                        "'" + power + "'," +
+                        "'" + site + "'," + "\n"
                 ;
     }
+
+    public String simlpeFormat() {
+        return id + " " + name + " " + swordColor + " " + power + " " + site + "\n";
+    }
+
+
 }
