@@ -4,6 +4,7 @@ import orderAndKnights.Knight;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.util.ArrayList;
 
 public class Models extends DefaultTableModel {
@@ -26,5 +27,13 @@ public class Models extends DefaultTableModel {
                 addRow(new Object[]{id + 1, k.getName(), k.getSwordColor(), k.getPower(), k.getSite()
                 });
         k.setId(id);
+    }
+
+    public void removeValueFromKnightTable(JTable jTable) {
+        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
+        while (defaultTableModel.getRowCount() > 0) {
+            defaultTableModel.removeRow(0);
+        }
+
     }
 }

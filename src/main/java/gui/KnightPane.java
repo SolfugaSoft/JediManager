@@ -1,14 +1,11 @@
 package gui;
 
 import databaseFunction.CrudFunction;
-import databaseFunction.JDBCConnector;
 import orderAndKnights.Knight;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
@@ -139,6 +136,8 @@ public class KnightPane extends JPanel {
         buttonKnightImport.setText("Import");
         buttonKnightImport.setBounds(10, 650, 80, 30);
         buttonKnightImport.addActionListener(e -> {
+            System.out.println(tableKnight.getRowCount());
+            models.removeValueFromKnightTable(tableKnight);
             models.addListToTable(crudFunction.readFromFile(buttonKnightImport, textFieldKnightImport), tableKnight);
         });
         add(buttonKnightImport);
@@ -157,7 +156,14 @@ public class KnightPane extends JPanel {
         buttonKnightExport.setText("Eksport");
         buttonKnightExport.setBounds(10, 695, 80, 30);
         buttonKnightExport.addActionListener(e -> {
-            crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
+            JPopupMenu jPopupMenu = new JPopupMenu("Gdzie zapisać");
+            JMenuItem remote = new JMenuItem("Zapisz zdalnie");
+            JMenuItem local = new JMenuItem("Zapisz lokalnie");
+            jPopupMenu.add(remote);
+            jPopupMenu.add(local);
+            buttonKnightExport.add(jPopupMenu);
+//            crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
+
 
         });
 
