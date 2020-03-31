@@ -22,15 +22,15 @@ public class CrudFunction extends JDBCConnector implements Functions {
     private static File file;
     private static Scanner scaner;
 
-    public void add() {
+    public void add(ArrayList<Knight> knightsList) {
         String tableName = "JediKnight";
         String addQuery = "INSERT INTO " + tableName + "(FirstName,SwordColor,Power,ForceSite) VALUES";
 
         try {
-            StartConnection().executeUpdate(
-                    "INSERT INTO " + tableName + "(FirstName,SwordColor,Power,ForceSite) VALUES " +
-                            "(\n'Adam', 'Ripper', 222, 'Uganda');"
-            );
+            for (Knight k : knightsList) {
+                StartConnection().executeUpdate(
+                        addQuery + k.sqlFormat());
+            }
             System.out.println("poszło");
         } catch (SQLException e) {
             System.out.println("nie poszło");

@@ -13,7 +13,6 @@ public class StartFrame extends JFrame {
         setLocation(150, 150);
         setSize(800, 600);
         setTitle("Manago Jedi");
-
         add(new KnightPane(), BorderLayout.EAST);
         add(new OrderPane(), BorderLayout.WEST);
         pack();

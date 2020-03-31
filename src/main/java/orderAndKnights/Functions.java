@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public interface Functions {
-    public void add();
+    public void add(ArrayList<Knight> knightsList);
 
     public ArrayList<String> get();
 

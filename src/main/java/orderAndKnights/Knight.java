@@ -67,7 +67,7 @@ public class Knight {
                 "('" + name + "'," +
                         "'" + swordColor + "'," +
                         "'" + power + "'," +
-                        "'" + site + "'," + "\n"
+                        "'" + site + "');" + "\n"
                 ;
     }
 

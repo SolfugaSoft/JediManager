@@ -37,11 +37,11 @@ public class KnightPane extends JPanel {
     private JButton buttonRegister;
     private JButton buttonClear;
 
+    private static String[] localRemote = {"Lokalnie", "Zdalnie"};
 
     public Dimension getPreferredSize() {
         return new Dimension(500, 900);
     }
-
 
     public KnightPane() {
         setLayout(null);
@@ -156,15 +156,13 @@ public class KnightPane extends JPanel {
         buttonKnightExport.setText("Eksport");
         buttonKnightExport.setBounds(10, 695, 80, 30);
         buttonKnightExport.addActionListener(e -> {
-            JPopupMenu jPopupMenu = new JPopupMenu("Gdzie zapisać");
-            JMenuItem remote = new JMenuItem("Zapisz zdalnie");
-            JMenuItem local = new JMenuItem("Zapisz lokalnie");
-            jPopupMenu.add(remote);
-            jPopupMenu.add(local);
-            buttonKnightExport.add(jPopupMenu);
-//            crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
 
-
+            int i = JOptionPane.showOptionDialog(this, "Would you like to save it", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, localRemote, localRemote[0]);
+            if (i == 0) {
+                crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
+            } else {
+            }
+            crudFunction.add(knightList);
         });
 
         add(buttonKnightExport);
