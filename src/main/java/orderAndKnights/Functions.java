@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface Functions {
     public void add(ArrayList<Knight> knightsList);
 
-    public ArrayList<String> get();
+    public ArrayList<Knight> get();
 
     public void saveIntoFile(Component parent, ArrayList<Knight> objectsToSave,JTextField textField);
 

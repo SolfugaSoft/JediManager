@@ -136,9 +136,17 @@ public class KnightPane extends JPanel {
         buttonKnightImport.setText("Import");
         buttonKnightImport.setBounds(10, 650, 80, 30);
         buttonKnightImport.addActionListener(e -> {
-            System.out.println(tableKnight.getRowCount());
-            models.removeValueFromKnightTable(tableKnight);
-            models.addListToTable(crudFunction.readFromFile(buttonKnightImport, textFieldKnightImport), tableKnight);
+
+            int i = JOptionPane.showOptionDialog(this, "Gdzie chcesz zapisać", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, localRemote, localRemote[0]);
+
+            if (i == 1) {
+                models.removeValueFromKnightTable(tableKnight);
+                models.addListToTable(crudFunction.get(), tableKnight);
+            } else {
+                System.out.println(tableKnight.getRowCount());
+                models.removeValueFromKnightTable(tableKnight);
+                models.addListToTable(crudFunction.readFromFile(buttonKnightImport, textFieldKnightImport), tableKnight);
+            }
         });
         add(buttonKnightImport);
 
@@ -156,13 +164,17 @@ public class KnightPane extends JPanel {
         buttonKnightExport.setText("Eksport");
         buttonKnightExport.setBounds(10, 695, 80, 30);
         buttonKnightExport.addActionListener(e -> {
+            if (knightList.size() > 0) {
 
-            int i = JOptionPane.showOptionDialog(this, "Would you like to save it", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, localRemote, localRemote[0]);
-            if (i == 0) {
-                crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
+                int i = JOptionPane.showOptionDialog(this, "Gdzie chcesz zapisać", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, localRemote, localRemote[0]);
+                if (i == 0) {
+                    crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
+                } else {
+                }
+                crudFunction.add(knightList);
             } else {
+                JOptionPane.showMessageDialog(this, "Lista jest pusta");
             }
-            crudFunction.add(knightList);
         });
 
         add(buttonKnightExport);
@@ -200,7 +212,10 @@ public class KnightPane extends JPanel {
         buttonClear = new JButton();
         buttonClear.setText("Wyczyść");
         buttonClear.addActionListener(e -> {
-            System.out.println(knightList);
+            int knightListSize = knightList.size();
+            knightList.clear();
+            ((DefaultTableModel) tableKnight.getModel()).setNumRows(0);
+            JOptionPane.showMessageDialog(this, "Dane wyczysztone ilosc danych przed wyczyszczeniem :" + knightListSize + " po wyczysczeniu : " + knightList.size());
         });
 
         buttonClear.setBounds(100, 730, 100, 50);

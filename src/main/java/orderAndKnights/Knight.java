@@ -52,6 +52,22 @@ public class Knight {
         this.swordColor = swordColors[swordColor];
     }
 
+    public void setSwordColorString(String swordColor) {
+        for (int i = 0; i < swordColors.length; i++) {
+            if (swordColors[i].equals(swordColor)) {
+                this.swordColor = swordColors[i];
+            }
+        }
+    }
+
+    public void setSiteString(String site) {
+        for (int i = 0; i < sites.length; i++) {
+            if (sites[i].equals(site)) {
+                this.site = sites[i];
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return

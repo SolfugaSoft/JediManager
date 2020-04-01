@@ -15,7 +15,6 @@ import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class CrudFunction extends JDBCConnector implements Functions {
@@ -39,7 +38,9 @@ public class CrudFunction extends JDBCConnector implements Functions {
 
     }
 
-    public ArrayList<String> get() {
+    public ArrayList<Knight> get() {
+        ArrayList<Knight>getKnightList = new ArrayList<>();
+        Knight k = null;
         String knight = "";
         ArrayList<String> getJediArray = new ArrayList<>();
         String tableName = "JediKnight";
@@ -47,6 +48,14 @@ public class CrudFunction extends JDBCConnector implements Functions {
         try {
             ResultSet resultSet = StartConnection().executeQuery(addQuery);
             while (resultSet.next()) {
+            k = new Knight();
+            k.setId(resultSet.getInt("ID"));
+            k.setName(resultSet.getString("FirstName"));
+            k.setSwordColorString(resultSet.getString("SwordColor"));
+            k.setPower(resultSet.getInt("Power"));
+            k.setSiteString(resultSet.getString("ForceSite"));
+            getKnightList.add(k);
+
 //                System.out.printf("%d,%s,%s,%d,%s \n",
 //                        resultSet.getInt("ID"),
 //                        resultSet.getString("FirstName"),
@@ -65,7 +74,7 @@ public class CrudFunction extends JDBCConnector implements Functions {
                 }
                 getJediArray.add(knight);
                 knight = "";
-                System.out.println(getJediArray);
+//                System.out.println(getJediArray);
             }
 
         } catch (SQLException e) {
@@ -73,7 +82,7 @@ public class CrudFunction extends JDBCConnector implements Functions {
             e.printStackTrace();
         }
 
-        return getJediArray;
+        return getKnightList;
     }
 
     @Override

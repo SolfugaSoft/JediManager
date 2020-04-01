@@ -15,8 +15,8 @@
     -Save Knight into local TXT file -> OK
     -Read from local TXT -> OK
     -Clear Table when import from local TXT -> OK
-    -Show imported Knight in Table - > OK
-    -Save Knight into remote DB
+    -Show imported Knight in Table -> OK
+    -Save Knight into remote DB -> OK
 
 5 . Create Order Function
     -Show new Order in Table
