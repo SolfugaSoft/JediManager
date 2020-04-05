@@ -1,6 +1,8 @@
 package orderAndKnights;
 
-public class Knight {
+import java.util.ArrayList;
+
+public class Knight extends Order {
     private int id;
     private String name;
     private SwordColor swordColor;
@@ -8,6 +10,7 @@ public class Knight {
     private Site site;
     private Site[] sites = Site.values();
     private SwordColor[] swordColors = SwordColor.values();
+    private ArrayList<Knight> actualKnightList = new ArrayList<>();
 
     public Knight() {
     }

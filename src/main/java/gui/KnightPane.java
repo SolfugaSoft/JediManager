@@ -2,6 +2,7 @@ package gui;
 
 import databaseFunction.CrudFunction;
 import orderAndKnights.Knight;
+import orderAndKnights.Order;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ public class KnightPane extends JPanel {
     Models models = new Models();
     private ArrayList<Knight> knightList = new ArrayList();
     private Knight knight;
+    private Order order = new Order();
 
     private JLabel labelKnight; // ok
     private JTextArea textAreaKnight; // ok
@@ -37,6 +39,8 @@ public class KnightPane extends JPanel {
     private JButton buttonRegister;
     private JButton buttonClear;
 
+    private JButton button1;
+
     private static String[] localRemote = {"Lokalnie", "Zdalnie"};
 
     public Dimension getPreferredSize() {
@@ -50,19 +54,12 @@ public class KnightPane extends JPanel {
         labelKnight.setBounds(250, 20, 70, 30);
         add(labelKnight);
 
-//        textAreaKnight = new JTextArea();
-//        textAreaKnight.setAlignmentX(CENTER_ALIGNMENT);
-//        textAreaKnight.setBounds(10, 50, 480, 400);
-//        textAreaKnight.setColumns(2);
-//        textAreaKnight.setRows(50);
-//        textAreaKnight.setLineWrap(true);
-//        add(textAreaKnight);
-
-        String[] tablename = {"ID", "Imie", "Kolor Miecza", "Moc", "Strona Mocy"};
+        Object[] tablename = {"ID", "Imie", "Kolor Miecza", "Moc", "Strona Mocy"};
         tableKnight = new JTable();
         tableKnight.setAutoscrolls(true);
+        tableKnight.setAutoResizeMode(4);
         tableKnight.setModel(new DefaultTableModel(new Object[][]{}, tablename));
-//        tableKnight.setBounds(10, 50, 480, 400);
+        tableKnight.getColumnModel().getColumn(0).setPreferredWidth(10);
 
         scrollKnight = new JScrollPane();
         scrollKnight.setViewportView(tableKnight);
@@ -80,7 +77,7 @@ public class KnightPane extends JPanel {
         add(labelKnightName);
 
         textFieldKnightName = new JTextField();
-        textFieldKnightName.setBounds(100, 480, 370, 30);
+        textFieldKnightName.setBounds(100, 480, 390, 30);
         textFieldKnightName.setToolTipText("Jak zwą tego dzielnego wojaka");
         add(textFieldKnightName);
 
@@ -140,12 +137,19 @@ public class KnightPane extends JPanel {
             int i = JOptionPane.showOptionDialog(this, "Gdzie chcesz zapisać", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, localRemote, localRemote[0]);
 
             if (i == 1) {
-                models.removeValueFromKnightTable(tableKnight);
-                models.addListToTable(crudFunction.get(), tableKnight);
-            } else {
+                knightList.clear();
+                models.removeValuetTable(tableKnight);
+                knightList.addAll(crudFunction.get());
+                models.addKnightsListToTable(knightList, tableKnight);
+
+            } else if (i == 0) {
+                knightList.clear();
                 System.out.println(tableKnight.getRowCount());
-                models.removeValueFromKnightTable(tableKnight);
-                models.addListToTable(crudFunction.readFromFile(buttonKnightImport, textFieldKnightImport), tableKnight);
+                models.removeValuetTable(tableKnight);
+                knightList.addAll(crudFunction.readFromFile(buttonKnightImport, textFieldKnightImport));
+                models.addKnightsListToTable(knightList, tableKnight);
+            } else {
+                JOptionPane.showMessageDialog(this, "wybierz coś");
             }
         });
         add(buttonKnightImport);
@@ -167,11 +171,12 @@ public class KnightPane extends JPanel {
             if (knightList.size() > 0) {
 
                 int i = JOptionPane.showOptionDialog(this, "Gdzie chcesz zapisać", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, localRemote, localRemote[0]);
+                System.out.println(i);
                 if (i == 0) {
                     crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
-                } else {
+                } else if (i == 1) {
+                    crudFunction.add(knightList);
                 }
-                crudFunction.add(knightList);
             } else {
                 JOptionPane.showMessageDialog(this, "Lista jest pusta");
             }
@@ -204,7 +209,7 @@ public class KnightPane extends JPanel {
                 knight.setSite(1);
             }
             knightList.add(knight);
-            models.addValueToTable(knight, tableKnight);
+            models.addOneKnightToTable(knight, tableKnight);
         });
 
         add(buttonRegister);
@@ -219,9 +224,17 @@ public class KnightPane extends JPanel {
         });
 
         buttonClear.setBounds(100, 730, 100, 50);
-
         add(buttonClear);
 
+
+        button1 = new JButton("test");
+        button1.setBounds(100, 800, 100, 50);
+        button1.addActionListener(e -> {
+            order.addKnightListToOrder(knightList,tableKnight);
+
+
+        });
+        add(button1);
     }
 
 }

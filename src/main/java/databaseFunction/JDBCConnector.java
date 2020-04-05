@@ -1,13 +1,7 @@
 package databaseFunction;
 
-import orderAndKnights.Functions;
-import orderAndKnights.Knight;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
+
 
 public class JDBCConnector {
 
@@ -24,13 +18,10 @@ public class JDBCConnector {
 
     public static Statement StartConnection() {
         try {
-//            Class.forName(JDBC_DRIVER);
+
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("Bangla");
             statement = connection.createStatement();
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("wygibało DriverManager");
-//            e.printStackTrace();
         } catch (SQLException e) {
             System.out.println("Wygibało dane do połączenia");
             e.printStackTrace();

@@ -11,9 +11,10 @@ public class StartFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLocation(150, 150);
-        setSize(800, 600);
+        setSize(1000, 600);
         setTitle("Manago Jedi");
         add(new KnightPane(), BorderLayout.EAST);
+        add(new FunctionPane(), BorderLayout.CENTER);
         add(new OrderPane(), BorderLayout.WEST);
         pack();
 

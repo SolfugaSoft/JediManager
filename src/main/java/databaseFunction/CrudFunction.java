@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class CrudFunction extends JDBCConnector implements Functions {
     private static File file;
     private static Scanner scaner;
@@ -30,7 +32,7 @@ public class CrudFunction extends JDBCConnector implements Functions {
                 StartConnection().executeUpdate(
                         addQuery + k.sqlFormat());
             }
-            System.out.println("poszło");
+            System.out.println("poszło zdalnie");
         } catch (SQLException e) {
             System.out.println("nie poszło");
             e.printStackTrace();
@@ -56,12 +58,6 @@ public class CrudFunction extends JDBCConnector implements Functions {
             k.setSiteString(resultSet.getString("ForceSite"));
             getKnightList.add(k);
 
-//                System.out.printf("%d,%s,%s,%d,%s \n",
-//                        resultSet.getInt("ID"),
-//                        resultSet.getString("FirstName"),
-//                        resultSet.getString("SwordColor"),
-//                        resultSet.getInt("Power"),
-//                        resultSet.getString("ForceSite"));
 
                 String[] knightTable = {String.valueOf(resultSet.getInt("ID")),
                         resultSet.getString("FirstName"),
@@ -74,14 +70,13 @@ public class CrudFunction extends JDBCConnector implements Functions {
                 }
                 getJediArray.add(knight);
                 knight = "";
-//                System.out.println(getJediArray);
             }
 
         } catch (SQLException e) {
             System.out.println("OOOoooo motyla noga cos nie działa");
             e.printStackTrace();
         }
-
+        System.out.println(getJediArray);
         return getKnightList;
     }
 

@@ -1,16 +1,27 @@
 package gui;
 
+import orderAndKnights.Order;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class OrderPane extends JPanel {
+    private Models models = new Models();
+    private Order order;
+    private ArrayList<Order> orderList = new ArrayList();
 
     private JLabel labelOrder; // ok
     private JTextArea textAreaOrder; // ok
+    private JTable tableOrder; //ok
+    private JScrollPane scrollOrder;//ok
     private JLabel labelOrderRegister; // ok
     private JLabel labelOrderName;//ok
     private JTextField textFieldOrderName; //ok
     private JButton buttonOrderChoose;
+    private JTable chooseJediTable;//ok
+    private JScrollPane scrollJediChooser;//ok
     private JTextArea textFieldChooseJedi; // ok
     private JButton buttonOrderImport; //ok
     private JTextField textFieldOrderImport;
@@ -19,11 +30,9 @@ public class OrderPane extends JPanel {
     private JButton buttonOrderRegister;
     private JButton buttonOrderClear;
 
-
     public Dimension getPreferredSize() {
         return new Dimension(500, 900);
     }
-
 
     public OrderPane() {
 
@@ -33,13 +42,15 @@ public class OrderPane extends JPanel {
         labelOrder.setBounds(250, 20, 70, 30);
         add(labelOrder);
 
-        textAreaOrder = new JTextArea();
-        textAreaOrder.setAlignmentX(CENTER_ALIGNMENT);
-        textAreaOrder.setBounds(10, 50, 480, 400);
-        textAreaOrder.setColumns(2);
-        textAreaOrder.setRows(50);
-        textAreaOrder.setLineWrap(true);
-        add(textAreaOrder);
+        String[] orderTableHeader = {"ID", "Nazwa Zakonu"};
+        tableOrder = new JTable();
+        tableOrder.setAutoscrolls(true);
+        tableOrder.setModel(new DefaultTableModel(new Object[][]{}, orderTableHeader));
+
+        scrollOrder = new JScrollPane();
+        scrollOrder.setViewportView(tableOrder);
+        scrollOrder.setBounds(10, 50, 480, 400);
+        add(scrollOrder);
 
         labelOrderRegister = new JLabel();
         labelOrderRegister.setText("Rejestracja Zakonu");
@@ -52,7 +63,8 @@ public class OrderPane extends JPanel {
         add(labelOrderName);
 
         textFieldOrderName = new JTextField();
-        textFieldOrderName.setBounds(100, 480, 320, 30);
+        textFieldOrderName.setBounds(100, 480, 390, 30);
+        textFieldOrderName.setToolTipText("wpisz nazwe zakonu");
         add(textFieldOrderName);
 
         buttonOrderChoose = new JButton();
@@ -60,10 +72,16 @@ public class OrderPane extends JPanel {
         buttonOrderChoose.setBounds(10, 520, 80, 30);
         add(buttonOrderChoose);
 
-        textFieldChooseJedi = new JTextArea();
-        textFieldChooseJedi.setBounds(100, 520, 320, 100);
-        add(textFieldChooseJedi);
 
+        String[] tablename = {"ID", "Imie", "Kolor Miecza", "Moc", "Strona Mocy"};
+        chooseJediTable = new JTable();
+        chooseJediTable.setAutoscrolls(true);
+        chooseJediTable.setModel(new DefaultTableModel(new Object[][]{}, tablename));
+
+        scrollJediChooser = new JScrollPane();
+        scrollJediChooser.setViewportView(chooseJediTable);
+        scrollJediChooser.setBounds(100, 520, 390, 100);
+        add(scrollJediChooser);
 
         buttonOrderImport = new JButton();
         buttonOrderImport.setText("Import");
@@ -92,17 +110,27 @@ public class OrderPane extends JPanel {
         textFieldOrderExport.setForeground(Color.black);
         add(textFieldOrderExport);
 
-
         buttonOrderRegister = new JButton();
         buttonOrderRegister.setText("Zarejestruj");
         buttonOrderRegister.setBounds(250, 730, 100, 50);
-        add(buttonOrderRegister);
+        buttonOrderRegister.addActionListener(e ->
+        {
+            order = new Order();
+            order.setOrderName(textFieldOrderName.getText());
+            models.addOrderToTable(order, tableOrder);
+            System.out.println(order);
 
+        });
+
+        add(buttonOrderRegister);
 
         buttonOrderClear = new JButton();
         buttonOrderClear.setText("Wyczyść");
         buttonOrderClear.setBounds(100, 730, 100, 50);
         add(buttonOrderClear);
+        orderList.add(order);
 
     }
+
+
 }
