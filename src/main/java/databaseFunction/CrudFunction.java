@@ -25,7 +25,7 @@ public class CrudFunction extends JDBCConnector implements Functions {
 
     public void add(ArrayList<Knight> knightsList) {
         String tableName = "JediKnight";
-        String addQuery = "INSERT INTO " + tableName + "(FirstName,SwordColor,Power,ForceSite) VALUES";
+        String addQuery = String.format("INSERT INTO %s(FirstName,SwordColor,Power,ForceSite) VALUES", tableName);
 
         try {
             for (Knight k : knightsList) {
@@ -76,7 +76,6 @@ public class CrudFunction extends JDBCConnector implements Functions {
             System.out.println("OOOoooo motyla noga cos nie działa");
             e.printStackTrace();
         }
-        System.out.println(getJediArray);
         return getKnightList;
     }
 

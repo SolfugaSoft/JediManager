@@ -39,7 +39,7 @@ public class Models extends DefaultTableModel {
         boolean copy = false;
         int id = jTable.getRowCount();
         ((DefaultTableModel) jTable.getModel()).
-                addRow(new Object[]{id + 1, k.getName(), k.getSwordColor(), k.getPower(), k.getSite(),copy
+                addRow(new Object[]{id + 1, k.getName(), k.getSwordColor(), k.getPower(), k.getSite()
                 });
         k.setId(id);
     }

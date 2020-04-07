@@ -7,7 +7,7 @@ public class Knight extends Order {
     private String name;
     private SwordColor swordColor;
     private int power;
-    private Site site;
+    private String site;
     private Site[] sites = Site.values();
     private SwordColor[] swordColors = SwordColor.values();
     private ArrayList<Knight> actualKnightList = new ArrayList<>();
@@ -39,12 +39,12 @@ public class Knight extends Order {
         this.power = power;
     }
 
-    public Site getSite() {
+    public String getSite() {
         return site;
     }
 
     public void setSite(int siteOfForce) {
-        this.site = sites[siteOfForce];
+        this.site = String.valueOf(sites[siteOfForce]);
     }
 
     public SwordColor getSwordColor() {
@@ -66,7 +66,7 @@ public class Knight extends Order {
     public void setSiteString(String site) {
         for (int i = 0; i < sites.length; i++) {
             if (sites[i].equals(site)) {
-                this.site = sites[i];
+                this.site = String.valueOf(sites[i]);
             }
         }
     }

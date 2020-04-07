@@ -141,6 +141,7 @@ public class KnightPane extends JPanel {
                 models.removeValuetTable(tableKnight);
                 knightList.addAll(crudFunction.get());
                 models.addKnightsListToTable(knightList, tableKnight);
+                System.out.println(knightList);
 
             } else if (i == 0) {
                 knightList.clear();
