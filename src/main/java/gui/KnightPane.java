@@ -5,14 +5,20 @@ import orderAndKnights.Knight;
 import orderAndKnights.Order;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
     CrudFunction crudFunction = new CrudFunction();
     Models models = new Models();
     private ArrayList<Knight> knightList = new ArrayList();
+    private  ArrayList<Knight>choosen = new ArrayList<>();
     private Knight knight;
     private Order order = new Order();
 
@@ -60,6 +66,17 @@ public class KnightPane extends JPanel {
         tableKnight.setAutoResizeMode(4);
         tableKnight.setModel(new DefaultTableModel(new Object[][]{}, tablename));
         tableKnight.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tableKnight.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableKnight.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                choosen.add(knightList.get(tableKnight.getSelectedRow()));
+                System.out.println(choosen);
+            }
+        });
+
+
 
         scrollKnight = new JScrollPane();
         scrollKnight.setViewportView(tableKnight);
@@ -141,7 +158,7 @@ public class KnightPane extends JPanel {
                 models.removeValuetTable(tableKnight);
                 knightList.addAll(crudFunction.get());
                 models.addKnightsListToTable(knightList, tableKnight);
-                System.out.println(knightList);
+
 
             } else if (i == 0) {
                 knightList.clear();
@@ -228,14 +245,6 @@ public class KnightPane extends JPanel {
         add(buttonClear);
 
 
-        button1 = new JButton("test");
-        button1.setBounds(100, 800, 100, 50);
-        button1.addActionListener(e -> {
-            order.addKnightListToOrder(knightList,tableKnight);
-
-
-        });
-        add(button1);
     }
 
 }

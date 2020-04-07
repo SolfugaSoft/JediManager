@@ -6,8 +6,7 @@ import java.util.ArrayList;
 public class Order {
     private int id;
     private String orderName;
-    private ArrayList<Knight> knightsInOrderList;
-    private ArrayList<Knight> chooseKnights;
+    private ArrayList<Knight>  chooseKnights = new ArrayList<>();
 
     public Order() {
     }
@@ -28,40 +27,27 @@ public class Order {
         this.orderName = orderName;
     }
 
-    public void addKnightToOrder(Knight k) {
-        knightsInOrderList.add(k);
-    }
-
     public ArrayList<Knight> getChooseKnights() {
         return chooseKnights;
     }
 
     public ArrayList<Knight> addKnightListToOrder(ArrayList<Knight> list, JTable jTable) {
-        chooseKnights = new ArrayList<>();
-        knightsInOrderList = new ArrayList<>();
-        if (list.isEmpty()) {
-            System.out.println("Lista jest pusta");
+        System.out.println(list.size());
+        if (list.size() > 0) {
+            chooseKnights.add(list.get(jTable.getSelectedRow()));
+            System.out.println(chooseKnights);
+
         } else {
-            knightsInOrderList.addAll(list);
-//            System.out.println(knightsInOrderList);
-        }
-        chooseKnights.add(knightsInOrderList.get(jTable.getSelectedRow()));
-        System.out.println(chooseKnights);
-        return chooseKnights;
+            System.out.println("Lista jest pusta");
+        } return chooseKnights;
 
     }
-
-    public ArrayList<Knight> selectKnight(JTable jTable) {
-        chooseKnights.add(knightsInOrderList.get(jTable.getSelectedRow()));
-        return chooseKnights;
-    }
-
 
     @Override
     public String toString() {
         return "Order{" +
                 "orderName='" + orderName + '\'' +
-                ", knightsInOrderList=" + knightsInOrderList +
+                ", knightsInOrderList=" + chooseKnights +
                 '}';
     }
 

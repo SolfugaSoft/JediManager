@@ -57,7 +57,7 @@ public class Knight extends Order {
 
     public void setSwordColorString(String swordColor) {
         for (int i = 0; i < swordColors.length; i++) {
-            if (swordColors[i].equals(swordColor)) {
+            if (swordColors[i].toString().equals(swordColor)) {
                 this.swordColor = swordColors[i];
             }
         }
@@ -65,8 +65,8 @@ public class Knight extends Order {
 
     public void setSiteString(String site) {
         for (int i = 0; i < sites.length; i++) {
-            if (sites[i].equals(site)) {
-                this.site = String.valueOf(sites[i]);
+            if (sites[i].toString().equals(site)) {
+               this.site = String.valueOf(sites[i]);
             }
         }
     }

@@ -57,19 +57,6 @@ public class CrudFunction extends JDBCConnector implements Functions {
             k.setPower(resultSet.getInt("Power"));
             k.setSiteString(resultSet.getString("ForceSite"));
             getKnightList.add(k);
-
-
-                String[] knightTable = {String.valueOf(resultSet.getInt("ID")),
-                        resultSet.getString("FirstName"),
-                        resultSet.getString("SwordColor"),
-                        String.valueOf(resultSet.getInt("Power")),
-                        resultSet.getString("ForceSite")};
-
-                for (int i = 0; i < knightTable.length; i++) {
-                    knight = knight + knightTable[i] + ",";
-                }
-                getJediArray.add(knight);
-                knight = "";
             }
 
         } catch (SQLException e) {
