@@ -12,10 +12,23 @@ public class Models extends DefaultTableModel {
     public Models() {
     }
 
+    public void createTableKnight(JTable jTable) {
+        Object[] tablename = {"ID", "Imie", "Kolor Miecza", "Moc", "Strona Mocy"};
+        jTable.setModel(new DefaultTableModel(new Object[][]{}, tablename));
+        jTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTable.setAutoscrolls(true);
+        jTable.setAutoResizeMode(4);
+    }
+
+    public void createTableOrder(JTable jTable) {
+        String[] orderTableHeader = {"ID", "Nazwa Zakonu"};
+        jTable.setModel(new DefaultTableModel(new Object[][]{}, orderTableHeader));
+        jTable.setAutoscrolls(true);
+    }
+
     public void addOrderToTable(Order o, JTable jTable) {
         int id = jTable.getRowCount();
-        ((DefaultTableModel) jTable.getModel()).
-                addRow(new Object[]{id + 1, o.getOrderName()
+        ((DefaultTableModel) jTable.getModel()).addRow(new Object[]{id + 1, o.getOrderName()
                 });
         o.setId(id);
     }
@@ -36,7 +49,6 @@ public class Models extends DefaultTableModel {
     }
 
     public void addOneKnightToTable(Knight k, JTable jTable) {
-        boolean copy = false;
         int id = jTable.getRowCount();
         ((DefaultTableModel) jTable.getModel()).
                 addRow(new Object[]{id + 1, k.getName(), k.getSwordColor(), k.getPower(), k.getSite()

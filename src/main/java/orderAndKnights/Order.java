@@ -43,6 +43,10 @@ public class Order {
 
     }
 
+    public void setChooseKnights(ArrayList<Knight> chooseKnights) {
+        this.chooseKnights = chooseKnights;
+    }
+
     @Override
     public String toString() {
         return "Order{" +

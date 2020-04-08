@@ -5,27 +5,24 @@ import orderAndKnights.Knight;
 import orderAndKnights.Order;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class KnightPane extends JPanel {
     CrudFunction crudFunction = new CrudFunction();
-    Models models = new Models();
+    public Models models = new Models();
     private ArrayList<Knight> knightList = new ArrayList();
-    private  ArrayList<Knight>choosen = new ArrayList<>();
+    public static ArrayList<Knight>choosen = new ArrayList<>();
     private Knight knight;
-    private Order order = new Order();
 
     private JLabel labelKnight; // ok
-    private JTextArea textAreaKnight; // ok
     private JScrollPane scrollKnight;
-    private JTable tableKnight; //ok
+    public  JTable tableKnight; //ok
 
     private JLabel labelKnightRegister; // ok
     private JLabel labelKnightName;//ok
@@ -45,12 +42,13 @@ public class KnightPane extends JPanel {
     private JButton buttonRegister;
     private JButton buttonClear;
 
-    private JButton button1;
-
     private static String[] localRemote = {"Lokalnie", "Zdalnie"};
 
     public Dimension getPreferredSize() {
         return new Dimension(500, 900);
+    }
+    public static ArrayList<Knight> getChoosen() {
+        return choosen;
     }
 
     public KnightPane() {
@@ -60,13 +58,8 @@ public class KnightPane extends JPanel {
         labelKnight.setBounds(250, 20, 70, 30);
         add(labelKnight);
 
-        Object[] tablename = {"ID", "Imie", "Kolor Miecza", "Moc", "Strona Mocy"};
         tableKnight = new JTable();
-        tableKnight.setAutoscrolls(true);
-        tableKnight.setAutoResizeMode(4);
-        tableKnight.setModel(new DefaultTableModel(new Object[][]{}, tablename));
-        tableKnight.getColumnModel().getColumn(0).setPreferredWidth(10);
-        tableKnight.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        models.createTableKnight(tableKnight);
         tableKnight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -75,8 +68,6 @@ public class KnightPane extends JPanel {
                 System.out.println(choosen);
             }
         });
-
-
 
         scrollKnight = new JScrollPane();
         scrollKnight.setViewportView(tableKnight);
@@ -243,7 +234,6 @@ public class KnightPane extends JPanel {
 
         buttonClear.setBounds(100, 730, 100, 50);
         add(buttonClear);
-
 
     }
 

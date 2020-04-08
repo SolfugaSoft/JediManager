@@ -3,6 +3,7 @@ package gui;
 import orderAndKnights.Order;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 public class FunctionPane extends JPanel {
@@ -12,16 +13,20 @@ public class FunctionPane extends JPanel {
     Order order = new Order();
     JButton addToOrderButton;
     JButton delFromOrderButton;
+
+    JTable jTable;
+
     public Dimension getPreferredSize() {
         return new Dimension(150, 900);
     }
+
     public FunctionPane() {
         setLayout(null);
 
         addToOrderButton = new JButton();
         addToOrderButton.setText("Dodaj do Zakonu");
-        addToOrderButton.setBounds(10,100,130,50);
-        addToOrderButton.addActionListener(e->{
+        addToOrderButton.setBounds(10, 100, 130, 50);
+        addToOrderButton.addActionListener(e -> {
             System.out.println(order.getChooseKnights());
         });
 
@@ -29,9 +34,14 @@ public class FunctionPane extends JPanel {
 
         delFromOrderButton = new JButton();
         delFromOrderButton.setText("Usuń z zakonu");
-        delFromOrderButton.setBounds(10,170,130,50);
+        delFromOrderButton.setBounds(10, 170, 130, 50);
         add(delFromOrderButton);
 
+        jTable = new JTable();
+        jTable.setBounds(10,240,130,50);
+        TableModel model = jTable.getModel();
+
+        add(jTable);
 
     }
 }
