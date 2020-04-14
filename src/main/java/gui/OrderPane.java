@@ -4,18 +4,17 @@ import orderAndKnights.Knight;
 import orderAndKnights.Order;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class OrderPane extends JPanel {
     private Models models = new Models();
-    private Order order;
-    private ArrayList<Order> orderList = new ArrayList();
-    private ArrayList<Knight> choosenList = KnightPane.getChoosen();
+    private Order order = new Order();
+    public static ArrayList<Order> orderList = new ArrayList();
     private JLabel labelOrder; // ok
-    private JTable tableOrder; //ok
+    public static JTable tableOrder; //ok
     private JScrollPane scrollOrder;//ok
     private JLabel labelOrderRegister; // ok
     private JLabel labelOrderName;//ok
@@ -35,7 +34,6 @@ public class OrderPane extends JPanel {
     }
 
     public OrderPane() {
-
         setLayout(null);
         labelOrder = new JLabel();
         labelOrder.setText("Zakon");
@@ -44,7 +42,15 @@ public class OrderPane extends JPanel {
 
         tableOrder = new JTable();
         models.createTableOrder(tableOrder);
-
+        tableOrder.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Order o = orderList.get(tableOrder.getSelectedRow());
+                models.addKnightsListToTable(o.getChooseKnights(),chooseJediTable);
+                System.out.println(orderList);
+            }
+        });
         scrollOrder = new JScrollPane();
         scrollOrder.setViewportView(tableOrder);
         scrollOrder.setBounds(10, 50, 480, 400);
@@ -71,7 +77,8 @@ public class OrderPane extends JPanel {
 
         chooseJediTable = new JTable();
         models.createTableKnight(chooseJediTable);
-        models.addKnightsListToTable(choosenList,chooseJediTable);
+
+
 
         scrollJediChooser = new JScrollPane();
         scrollJediChooser.setViewportView(chooseJediTable);
@@ -113,6 +120,7 @@ public class OrderPane extends JPanel {
             order = new Order();
             order.setOrderName(textFieldOrderName.getText());
             models.addOrderToTable(order, tableOrder);
+            orderList.add(order);
             System.out.println(order);
         });
 
@@ -123,8 +131,7 @@ public class OrderPane extends JPanel {
         buttonOrderClear.setBounds(100, 730, 100, 50);
         add(buttonOrderClear);
         orderList.add(order);
-
-
+        System.out.println(orderList);
     }
 
 

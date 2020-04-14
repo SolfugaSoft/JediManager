@@ -31,21 +31,10 @@ public class Order {
         return chooseKnights;
     }
 
-    public ArrayList<Knight> addKnightListToOrder(ArrayList<Knight> list, JTable jTable) {
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            chooseKnights.add(list.get(jTable.getSelectedRow()));
-            System.out.println(chooseKnights);
-
-        } else {
-            System.out.println("Lista jest pusta");
-        } return chooseKnights;
-
+    public void addKnightListToOrder(ArrayList<Knight> list) {
+        this.chooseKnights =  list;
     }
 
-    public void setChooseKnights(ArrayList<Knight> chooseKnights) {
-        this.chooseKnights = chooseKnights;
-    }
 
     @Override
     public String toString() {

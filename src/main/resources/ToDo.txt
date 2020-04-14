@@ -18,10 +18,14 @@
     -Show imported Knight in Table -> OK
     -Save Knight into remote DB -> OK
 
-5 . Create Order Function
-    -Show new Order in Table
-    -Add Knight to Order
-    -Save Order into List
+5 . Create Add and Del Pane
+    -Show choosen Knights -> OK
+    -Add choosen Knights to Order -> OK
+
+6 . Create Order Function
+    -Show new Order in Table ->OK
+    -Add Knight to Order -> OK
+    -Save Order into List -> OK
     -Save Order into local TXT file
     -Save Order into remote DB
 

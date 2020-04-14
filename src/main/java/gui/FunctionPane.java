@@ -1,20 +1,27 @@
 package gui;
 
+import orderAndKnights.Knight;
 import orderAndKnights.Order;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+
+import static gui.OrderPane.*;
+
 
 public class FunctionPane extends JPanel {
 
-    KnightPane knightPane;
-    OrderPane orderPane;
-    Order order = new Order();
+
+    Order order;
     JButton addToOrderButton;
     JButton delFromOrderButton;
-
-    JTable jTable;
+    public static JTable jTableFunction;
+    JScrollPane scrollPane;
+    Models models = new Models();
+    private ArrayList<Knight> choosenList = KnightPane.getChoosen();
 
     public Dimension getPreferredSize() {
         return new Dimension(150, 900);
@@ -22,12 +29,12 @@ public class FunctionPane extends JPanel {
 
     public FunctionPane() {
         setLayout(null);
-
         addToOrderButton = new JButton();
         addToOrderButton.setText("Dodaj do Zakonu");
         addToOrderButton.setBounds(10, 100, 130, 50);
         addToOrderButton.addActionListener(e -> {
-            System.out.println(order.getChooseKnights());
+            order = orderList.get(tableOrder.getSelectedRow());
+            order.addKnightListToOrder(choosenList);
         });
 
         add(addToOrderButton);
@@ -37,11 +44,13 @@ public class FunctionPane extends JPanel {
         delFromOrderButton.setBounds(10, 170, 130, 50);
         add(delFromOrderButton);
 
-        jTable = new JTable();
-        jTable.setBounds(10,240,130,50);
-        TableModel model = jTable.getModel();
+        jTableFunction = new JTable();
+        models.createNameTable(jTableFunction);
 
-        add(jTable);
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 240, 130, 200);
+        scrollPane.setViewportView(jTableFunction);
+        add(scrollPane);
 
     }
 }

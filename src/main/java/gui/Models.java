@@ -26,10 +26,16 @@ public class Models extends DefaultTableModel {
         jTable.setAutoscrolls(true);
     }
 
+    public void createNameTable(JTable jTable) {
+         String[] names = {"Imie"};
+        jTable.setModel(new DefaultTableModel(new Object[][]{},names));
+        jTable.setAutoscrolls(true);
+    }
+
     public void addOrderToTable(Order o, JTable jTable) {
         int id = jTable.getRowCount();
         ((DefaultTableModel) jTable.getModel()).addRow(new Object[]{id + 1, o.getOrderName()
-                });
+        });
         o.setId(id);
     }
 
@@ -50,10 +56,20 @@ public class Models extends DefaultTableModel {
 
     public void addOneKnightToTable(Knight k, JTable jTable) {
         int id = jTable.getRowCount();
+
         ((DefaultTableModel) jTable.getModel()).
                 addRow(new Object[]{id + 1, k.getName(), k.getSwordColor(), k.getPower(), k.getSite()
                 });
+
         k.setId(id);
+    }
+
+    public void addName(Knight k, JTable jTable) {
+
+
+        ((DefaultTableModel) jTable.getModel()).addRow(new Object[]{k.getName()
+        });
+
     }
 
     public void removeValuetTable(JTable jTable) {

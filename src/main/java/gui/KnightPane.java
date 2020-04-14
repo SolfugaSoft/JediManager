@@ -2,27 +2,33 @@ package gui;
 
 import databaseFunction.CrudFunction;
 import orderAndKnights.Knight;
-import orderAndKnights.Order;
 
 import javax.swing.*;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import static gui.FunctionPane.jTableFunction;
+
+
 public class KnightPane extends JPanel {
+    OrderPane orderPane = new OrderPane();
+    FunctionPane functionPane = new FunctionPane();
+
     CrudFunction crudFunction = new CrudFunction();
     public Models models = new Models();
     private ArrayList<Knight> knightList = new ArrayList();
-    public static ArrayList<Knight>choosen = new ArrayList<>();
+    public static ArrayList<Knight> choosen = new ArrayList<>();
     private Knight knight;
 
     private JLabel labelKnight; // ok
     private JScrollPane scrollKnight;
-    public  JTable tableKnight; //ok
+    public JTable tableKnight; //ok
 
     private JLabel labelKnightRegister; // ok
     private JLabel labelKnightName;//ok
@@ -47,6 +53,7 @@ public class KnightPane extends JPanel {
     public Dimension getPreferredSize() {
         return new Dimension(500, 900);
     }
+
     public static ArrayList<Knight> getChoosen() {
         return choosen;
     }
@@ -65,7 +72,8 @@ public class KnightPane extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 choosen.add(knightList.get(tableKnight.getSelectedRow()));
-                System.out.println(choosen);
+                Knight k = knightList.get(tableKnight.getSelectedRow());
+                models.addName(k, jTableFunction);
             }
         });
 
@@ -153,7 +161,6 @@ public class KnightPane extends JPanel {
 
             } else if (i == 0) {
                 knightList.clear();
-                System.out.println(tableKnight.getRowCount());
                 models.removeValuetTable(tableKnight);
                 knightList.addAll(crudFunction.readFromFile(buttonKnightImport, textFieldKnightImport));
                 models.addKnightsListToTable(knightList, tableKnight);
@@ -180,7 +187,6 @@ public class KnightPane extends JPanel {
             if (knightList.size() > 0) {
 
                 int i = JOptionPane.showOptionDialog(this, "Gdzie chcesz zapisać", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, localRemote, localRemote[0]);
-                System.out.println(i);
                 if (i == 0) {
                     crudFunction.saveIntoFile(buttonKnightExport, knightList, textFieldKnightExport);
                 } else if (i == 1) {
@@ -228,6 +234,7 @@ public class KnightPane extends JPanel {
         buttonClear.addActionListener(e -> {
             int knightListSize = knightList.size();
             knightList.clear();
+            choosen.clear();
             ((DefaultTableModel) tableKnight.getModel()).setNumRows(0);
             JOptionPane.showMessageDialog(this, "Dane wyczysztone ilosc danych przed wyczyszczeniem :" + knightListSize + " po wyczysczeniu : " + knightList.size());
         });

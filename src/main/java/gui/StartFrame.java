@@ -6,8 +6,11 @@ import java.awt.*;
 
 public class StartFrame extends JFrame {
 
+KnightPane knightPane = new KnightPane();
+
 
     public StartFrame() throws HeadlessException {
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLocation(150, 150);
